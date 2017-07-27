@@ -3,7 +3,8 @@ import {
 	View,
 	Animated,
 	PanResponder,
-	Dimensions
+	Dimensions,
+	Text
 } from 'react-native';
 
 const SCREEN_WIDTH = Dimensions.get('window').width
@@ -74,8 +75,13 @@ class Deck extends Component {
 	}
 
 	renderCards() {
-		return this.props.data.map((item, index) => {
-			if ( index === 0 ) {
+		if( this.state.index >= this.props.data.length) {
+			return this.props.renderNoMoreCards();
+		}
+
+		return this.props.data.map((item, i) => {
+			if ( i < this.state.index) { return null };
+			if ( i === this.state.index ) {
 				return (
 					<Animated.View
 						key={item.id}
@@ -85,6 +91,8 @@ class Deck extends Component {
 				 		{this.props.renderCard(item)}
 					</Animated.View>
 				);
+			}else {
+
 			}
 		});
 	}
