@@ -14,9 +14,22 @@ class Deck extends Component {
 			},
 			onPandResponderRelease: () => {}
 		});
-			this.position = position
-			this.state = { panResponder }
+
+			this.state = { panResponder, position }
 	}
+
+	getCardStyle() {
+		const { position } = this.state;
+		const rotate = position.x.interpolate({
+			inputRange: [-500,0,500],
+			outputRange: ['-120deg', '0deg', '120deg']
+		});
+		return {
+			...position.getLayout(),
+			transform: [{ rotate }]
+		};
+	}
+
 
 
 	renderCards() {
@@ -25,14 +38,13 @@ class Deck extends Component {
 				return (
 					<Animated.View
 						key={item.id}
-						style={this.position.getLayout()}
+						style={this.getCardStyle()}
 						 {...this.state.panResponder.panHandlers}
 					>
 				 		{this.props.renderCard(item)}
 					</Animated.View>
 				);
 			}
-
 		});
 	}
 
