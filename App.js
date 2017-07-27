@@ -32,6 +32,7 @@ class App extends Component {
     return (
 
         <Card
+
           key={item.id}
           title={item.text}
           image={{uri: item.uri}}
@@ -49,6 +50,7 @@ class App extends Component {
   }
 
   renderNoMoreCards() {
+
     return (
       <Card title="All Done!">
         <Text style={{ marginBottom: 10}}>There are no more cards to swipe</Text>
@@ -81,5 +83,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   }
 });
+
+
 
 export default App;
