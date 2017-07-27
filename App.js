@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import Deck from './src/Deck';
 import { Card, Button, Header } from 'react-native-elements'
+import firebase from 'firebase';
 
 const DATA = [
   { id: 1, text: 'Andria', uri: 'http://imgs.abduzeedo.com/files/paul0v2/unsplash/unsplash-04.jpg' },
@@ -16,11 +17,21 @@ const DATA = [
 
 
 class App extends Component {
+
+  componentWillMount() {
+     firebase.initializeApp({
+    apiKey: "AIzaSyBe2HlQsFOqGal5cmI1DLVnVQZfFrEsMBc",
+    authDomain: "auth-react-native-fbe32.firebaseapp.com",
+    databaseURL: "https://auth-react-native-fbe32.firebaseio.com",
+    projectId: "auth-react-native-fbe32",
+    storageBucket: "auth-react-native-fbe32.appspot.com",
+    messagingSenderId: "239636965928"
+  });
+  }
   renderCard(item) {
     return (
 
         <Card
-
           key={item.id}
           title={item.text}
           image={{uri: item.uri}}
@@ -34,20 +45,18 @@ class App extends Component {
             title="View Now!"
           />
         </Card>
-
     )
   }
 
   render() {
     return (
-
         <View style={styles.container}>
           <Deck
             data={DATA}
             renderCard={this.renderCard}
+
           />
         </View>
-
     );
   }
 }
